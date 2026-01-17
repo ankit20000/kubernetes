@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: python-backend-nodeport
+  namespace: demo
 spec:
   type: NodePort
   selector:
