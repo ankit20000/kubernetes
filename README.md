@@ -118,7 +118,15 @@ kubectl uncordon ip-192-168-22-233.ap-south-1.compute.internal
 cordon → drain → maintain → uncordon
 
 
+# DaemonSet
+A DaemonSet defines Pods that provide node-local facilities. These might be fundamental to the operation of your cluster, such as a networking helper tool, or be part of an add-on.
+A DaemonSet ensures that all (or some) Nodes run a copy of a Pod. As nodes are added to the cluster, Pods are added to them. As nodes are removed from the cluster, those Pods are garbage collected. Deleting a DaemonSet will clean up the Pods it created.
 
+Some typical uses of a DaemonSet are:
+
+running a cluster storage daemon on every node
+running a logs collection daemon on every node
+running a node monitoring daemon on every node
 
 
 # Setup grafana , Prom 
