@@ -133,7 +133,7 @@ npm → Node.js
 
 👉 Helm manages Kubernetes applications as packages called Charts.
 
-🔹 Why Do We Need Helm?
+# Why Do We Need Helm?
 
 Without Helm, managing Kubernetes apps becomes:
 
@@ -145,7 +145,7 @@ Without Helm, managing Kubernetes apps becomes:
 
 Helm solves all of this.
 
-🔹 Problem WITHOUT Helm (Reality)
+# Problem WITHOUT Helm (Reality)
 
 Example: Installing Prometheus manually
 
@@ -186,7 +186,7 @@ A DaemonSet ensures that all (or some) Nodes run a copy of a Pod. As nodes are a
 Some typical uses of a DaemonSet are:
 
 running a cluster storage daemon on every node
-running a logs collection daemon on every node
+running a log collection daemon on every node
 running a node monitoring daemon on every node
 
 
