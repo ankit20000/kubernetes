@@ -117,6 +117,67 @@ kubectl uncordon ip-192-168-22-233.ap-south-1.compute.internal
 # 5️⃣ COMPLETE FLOW (REAL PRODUCTION)
 cordon → drain → maintain → uncordon
 
+# HELM
+What is Helm?
+✅ Definition (Simple)
+
+Helm is a package manager for Kubernetes.
+
+Just like:
+
+apt → Linux
+
+yum → Linux
+
+npm → Node.js
+
+👉 Helm manages Kubernetes applications as packages called Charts.
+
+🔹 Why Do We Need Helm?
+
+Without Helm, managing Kubernetes apps becomes:
+
+❌ Too many YAML files
+❌ Manual updates
+❌ Hard rollbacks
+❌ Configuration duplication
+❌ Error-prone deployments
+
+Helm solves all of this.
+
+🔹 Problem WITHOUT Helm (Reality)
+
+Example: Installing Prometheus manually
+
+You must create:
+
+Deployment YAML
+
+Service YAML
+
+ConfigMaps
+
+RBAC
+
+CRDs
+
+Alertmanager configs
+
+Grafana dashboards
+
+💥 50+ YAML files
+
+🔹 Solution WITH Helm
+helm install monitoring prometheus-community/kube-prometheus-stack
+
+
+✔ Everything installed
+✔ Correct versions
+✔ Best practices
+✔ Production-ready
+
+# Download helm 
+https://helm.sh/docs/intro/install/
 
 # DaemonSet
 A DaemonSet defines Pods that provide node-local facilities. These might be fundamental to the operation of your cluster, such as a networking helper tool, or be part of an add-on.
