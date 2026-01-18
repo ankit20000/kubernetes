@@ -116,3 +116,87 @@ kubectl uncordon ip-192-168-22-233.ap-south-1.compute.internal
 
 # 5️⃣ COMPLETE FLOW (REAL PRODUCTION)
 cordon → drain → maintain → uncordon
+
+
+
+
+
+# Setup grafana , Prom 
+
+# Check cluster access
+kubectl get nodes
+
+Install Helm (if not installed)
+brew install helm
+
+
+Verify:
+
+helm version
+
+# STEP 2 — CREATE A MONITORING NAMESPACE
+kubectl create namespace monitoring
+
+
+Why?
+
+Keeps monitoring workloads isolated from applications
+
+# STEP 3 — ADD PROMETHEUS HELM REPO
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+
+# STEP 4 — INSTALL PROMETHEUS + GRAFANA (KUBE-PROMETHEUS-STACK)
+helm install monitoring prometheus-community/kube-prometheus-stack \
+  --namespace monitoring
+
+What this installs automatically
+
+✅ Prometheus
+✅ Grafana
+✅ Alertmanager
+✅ Node Exporter
+✅ kube-state-metrics
+
+
+# STEP 5 — VERIFY PODS
+kubectl get pods -n monitoring
+
+
+You should see:
+
+prometheus-*
+grafana-*
+alertmanager-*
+node-exporter-*
+
+# STEP 6 — ACCESS GRAFANA
+Get Grafana service
+kubectl get svc -n monitoring
+
+
+Grafana service name:
+
+monitoring-grafana
+
+OPTION 1️⃣ — Port Forward (BEST FOR DEMO)
+kubectl port-forward svc/monitoring-grafana 3000:80 -n monitoring
+
+
+Open browser:
+
+http://localhost:3000
+
+# OPTION 2️⃣ — LoadBalancer (EKS PRODUCTION)
+kubectl patch svc monitoring-grafana -n monitoring \
+  -p '{"spec":{"type":"LoadBalancer"}}'
+
+
+Then:
+
+kubectl get svc -n monitoring
+
+# STEP 7 — GRAFANA LOGIN
+Get admin password
+kubectl get secret monitoring-grafana -n monitoring \
+  -o jsonpath="{.data.admin-password}" | base64 --decode
